@@ -25,8 +25,7 @@ void destroy_node(node_l* node);
 
 int push(list* list, void* data, TYPES type);
 int append(list* list, void* data, TYPES type);
-return_vals* retrive_data(list* list, int pos);
-return_vals* remove_node(list* list, int pos);
+return_vals* retrive_data(list* list, int pos, int destroy);
 return_vals* pop(list* list);
 return_vals* trim(list* list);
 

@@ -1,6 +1,9 @@
 #include "list.h"
 
 void destroy_node(node_l* node) {
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+
     free(node->data);
     node->data = NULL;
     node->next = NULL;
@@ -82,6 +85,38 @@ int append(list* list, void* data, TYPES type) {
     return SUCCESS;
 }
 
+node_l* retrive_node(list* list, int pos);
+
+return_vals* retrive_data(list* list, int pos, int destroy) {
+    node_l* node = retrive_node(list, pos);
+    if (node==NULL)
+        return NULL;
+
+    return_vals* val = (return_vals*)malloc(sizeof(return_vals));
+    val->data = node->data;
+    val->type = node->type;
+
+    if (destroy!=0) 
+        destroy_node(node);
+
+    return val;
+}
+
+return_vals* pop(list* list) {
+    if (list==NULL || list->head==NULL)
+        return NULL;
+    return_vals* vals = retrive_data(list, 0, 1);
+    return vals;
+}
+
+return_vals* trim(list* list) {
+    if (list==NULL || list->tail==NULL)
+        return NULL;
+    return_vals* vals = retrive_data(list, list->size-1, 1);
+    return vals;
+}
+
+// HELPERS
 node_l* retrive_node(list* list, int pos) {
     if (list==NULL || list->size<=pos)
         return NULL;
@@ -107,29 +142,4 @@ node_l* retrive_node(list* list, int pos) {
     }
 
     return tmp;
-}
-
-return_vals* pop(list* list) {
-    if (list==NULL || list->head==NULL)
-        return NULL;
-    return_vals* vals = remove_node(list, 0);
-    return vals;
-}
-
-return_vals* trim(list* list) {
-    if (list==NULL || list->tail==NULL)
-        return NULL;
-    return_vals* vals = remove_node(list, list->size-1);
-    return vals;
-}
-
-return_vals* retrive_data(list* list, int pos) {
-    node_l* node = retrive_node(list, pos);
-    if (node==NULL)
-        return NULL;
-
-    return_vals* val = (return_vals*)malloc(sizeof(return_vals));
-    val->data = node->data;
-    val->type = node->type;
-    return val;
 }
