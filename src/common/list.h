@@ -16,12 +16,21 @@ struct list {
     node_l* tail;
     int size;
 };
+typedef struct return_vals return_vals;
+struct return_vals {
+    void* data;
+    TYPES type;
+};
 
 list* generate_list();
 void destroy_list(list* list);
 
-void forward_march(list* list, void (*op)(node_l*));
-void backward_march(list* list, void (*op)(node_l*));
+void march(list* list, void (*op)(node_l*), int reverse);
 void destroy_node(node_l* node);
+
+int push(list* list, void* data, TYPES type);
+int append(list* list, void* data, TYPES type);
+return_vals* pop(list* list);
+return_vals* trim(list* list);
 
 #endif // LIST_H
