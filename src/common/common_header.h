@@ -12,3 +12,9 @@ enum TYPES {
     CHAR,
     STRING,
 };
+
+typedef struct return_vals return_vals;
+struct return_vals {
+    void* data;
+    TYPES type;
+};

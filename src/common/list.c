@@ -32,20 +32,13 @@ list* generate_list() {
 }
 
 void march(list* list, void (*op)(node_l*), int reverse) {
-    if (reverse!=0) {
-        node_l* tmp = list->tail;
-        while (tmp!=NULL) {
-            tmp = tmp->prev;
-            list->tail = tmp->next;
-            op(list->tail);
-        }
+    if (list == NULL)
         return;
-    }
-    node_l* tmp = list->head;
-    while (tmp!=NULL) {
-        tmp = tmp->next;
-        list->head = tmp->prev;
-        op(list->head);
+    node_l* current = (reverse ? list->tail : list->head);
+
+    while (current!=NULL) {
+        (*op)(current);
+        current =  (reverse ? (current->prev) : (current->next));
     }
 }
 
@@ -62,9 +55,14 @@ int push(list* list, void* data, TYPES type) {
     if (node == NULL)
         return FAILURE;
     
-    if (list->head!=NULL)
+    if (list->size==0)
+        list->tail = node;
+    else {
+        list->head->prev = node;
         node->next = list->head;
+    }
     list->head = node;
+    list->size++;
     return SUCCESS;
 }
 
@@ -73,34 +71,65 @@ int append(list* list, void* data, TYPES type) {
     if (node == NULL)
         return FAILURE;
     
-    if (list->tail!=NULL)
+    if (list->size==0)
+        list->head = node;
+    else {
+        list->tail->next = node;
         node->prev = list->tail;
+    }
     list->tail = node;
+    list->size++;
     return SUCCESS;
+}
+
+node_l* retrive_node(list* list, int pos) {
+    if (list==NULL || list->size<=pos)
+        return NULL;
+    
+    node_l* tmp;
+    int current_pos;
+    int reverse;
+    if (pos>(list->size-1)/2) {
+        reverse = 1;
+        current_pos = list->size-1;
+        tmp = list->tail;
+    } else {
+        reverse = 0;
+        current_pos = 0;
+        tmp = list->head;
+    }
+
+    while (tmp!=NULL) {
+        if (current_pos==pos)
+            break;
+        tmp = (reverse ? (tmp->prev) : (tmp->next));
+        current_pos = (reverse ? current_pos-- : current_pos++);
+    }
+
+    return tmp;
 }
 
 return_vals* pop(list* list) {
     if (list==NULL || list->head==NULL)
         return NULL;
-    return_vals* vals = (return_vals*) malloc(sizeof(return_vals));
-    node_l* tmp = list->head;
-    list->head = tmp->next;
-    vals->data = tmp->data;
-    vals->type = tmp->type;
-    destroy_node(tmp);
-
+    return_vals* vals = remove_node(list, 0);
     return vals;
 }
 
 return_vals* trim(list* list) {
     if (list==NULL || list->tail==NULL)
         return NULL;
-    return_vals* vals = (return_vals*) malloc(sizeof(return_vals));
-    node_l* tmp = list->tail;
-    list->head = tmp->prev;
-    vals->data = tmp->data;
-    vals->type = tmp->type;
-    destroy_node(tmp);
-
+    return_vals* vals = remove_node(list, list->size-1);
     return vals;
+}
+
+return_vals* retrive_data(list* list, int pos) {
+    node_l* node = retrive_node(list, pos);
+    if (node==NULL)
+        return NULL;
+
+    return_vals* val = (return_vals*)malloc(sizeof(return_vals));
+    val->data = node->data;
+    val->type = node->type;
+    return val;
 }
