@@ -8,4 +8,4 @@ enum TYPES {
     FLOAT,
     CHAR,
     STRING,
-}
+};
