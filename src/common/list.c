@@ -1,28 +1,7 @@
 #include "list.h"
 
-void destroy_node(node_l* node) {
-    node->prev->next = node->next;
-    node->next->prev = node->prev;
-
-    free(node->data);
-    node->data = NULL;
-    node->next = NULL;
-    node->prev = NULL;
-    
-    free(node);
-    node = NULL;
-}
-
-node_l* generate_node(void* data, TYPES type) {
-    node_l* new_node = (node_l*)malloc(sizeof(node_l));
-    if (new_node!=NULL) {
-        new_node->data = data;
-        new_node->type = type;
-        new_node->next = NULL;
-        new_node->prev = NULL;
-    }
-    return new_node;
-}
+void destroy_node(node_l* node);
+node_l* generate_node(void* data, TYPES type);
 
 list* generate_list() {
     list* new_list = (list*)malloc(sizeof(list));
@@ -117,6 +96,30 @@ return_vals* trim(list* list) {
 }
 
 // HELPERS
+void destroy_node(node_l* node) {
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+
+    free(node->data);
+    node->data = NULL;
+    node->next = NULL;
+    node->prev = NULL;
+    
+    free(node);
+    node = NULL;
+}
+
+node_l* generate_node(void* data, TYPES type) {
+    node_l* new_node = (node_l*)malloc(sizeof(node_l));
+    if (new_node!=NULL) {
+        new_node->data = data;
+        new_node->type = type;
+        new_node->next = NULL;
+        new_node->prev = NULL;
+    }
+    return new_node;
+}
+
 node_l* retrive_node(list* list, int pos) {
     if (list==NULL || list->size<=pos)
         return NULL;
