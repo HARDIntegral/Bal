@@ -1,2 +1,2 @@
 # Bolt
-A modern low-level fast general purpose language
+A modern, fast, general purpose, scripting language
