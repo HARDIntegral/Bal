@@ -14,8 +14,7 @@ list* generate_list() {
 }
 
 void march(list* list, void (*op)(node_l*), int reverse) {
-    if (list == NULL)
-        return;
+    if (list == NULL) return;
     node_l* current = (reverse ? list->tail : list->head);
 
     while (current!=NULL) {
@@ -34,11 +33,9 @@ void destroy_list(list* list) {
 
 int push(list* list, void* data, TYPES type) {
     node_l* node = generate_node(data, type);
-    if (node == NULL)
-        return FAILURE;
+    if (node == NULL) return FAILURE;
     
-    if (list->size==0)
-        list->tail = node;
+    if (list->size==0) list->tail = node;
     else {
         list->head->prev = node;
         node->next = list->head;
@@ -50,8 +47,7 @@ int push(list* list, void* data, TYPES type) {
 
 int append(list* list, void* data, TYPES type) {
     node_l* node = generate_node(data, type);
-    if (node == NULL)
-        return FAILURE;
+    if (node == NULL) return FAILURE;
     
     if (list->size==0)
         list->head = node;
@@ -68,29 +64,25 @@ node_l* retrive_node(list* list, int pos);
 
 return_vals* retrive_data(list* list, int pos, int destroy) {
     node_l* node = retrive_node(list, pos);
-    if (node==NULL)
-        return NULL;
+    if (node==NULL) return NULL;
 
     return_vals* val = (return_vals*)malloc(sizeof(return_vals));
     val->data = node->data;
     val->type = node->type;
 
-    if (destroy!=0) 
-        destroy_node(node);
+    if (destroy!=0) destroy_node(node);
 
     return val;
 }
 
 return_vals* pop(list* list) {
-    if (list==NULL || list->head==NULL)
-        return NULL;
+    if (list==NULL || list->head==NULL) return NULL;
     return_vals* vals = retrive_data(list, 0, 1);
     return vals;
 }
 
 return_vals* trim(list* list) {
-    if (list==NULL || list->tail==NULL)
-        return NULL;
+    if (list==NULL || list->tail==NULL) return NULL;
     return_vals* vals = retrive_data(list, list->size-1, 1);
     return vals;
 }
@@ -121,8 +113,7 @@ node_l* generate_node(void* data, TYPES type) {
 }
 
 node_l* retrive_node(list* list, int pos) {
-    if (list==NULL || list->size<=pos)
-        return NULL;
+    if (list==NULL || list->size<=pos) return NULL;
     
     node_l* tmp;
     int current_pos;

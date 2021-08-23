@@ -14,7 +14,7 @@ typedef struct list list;
 struct list {
     node_l* head;
     node_l* tail;
-    int size;
+    unsigned int size;
 };
 
 list* generate_list();

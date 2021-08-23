@@ -2,8 +2,7 @@
 
 tree* generate_tree() {
     tree* new_tree = (tree*) malloc(sizeof(tree));
-    if (new_tree!=NULL)
-        new_tree->root = NULL;
+    if (new_tree!=NULL) new_tree->root = NULL;
     return new_tree;
 }
 

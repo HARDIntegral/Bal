@@ -11,6 +11,7 @@ enum TYPES {
     FLOAT,
     CHAR,
     STRING,
+    HASH,
 };
 
 typedef struct return_vals return_vals;
