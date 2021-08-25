@@ -5,6 +5,7 @@ OBJ_DIR = bin/obj/
 EXEC_DIR = bin/
 NAME = bolt
 TARGET = out
+LIBS = -lm
 
 #### DO NOT EDIT BELOW THIS LINE ####
 
@@ -15,7 +16,7 @@ OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 all: $(OBJS)
 	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
-	@$(CC) -o $(BUILD) $^
+	@$(CC) -o $(BUILD) $^ $(LIBS)
 	@echo [INFO] [$(EXEC)] Created!
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

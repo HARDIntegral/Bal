@@ -16,27 +16,28 @@ int resize_table(table* hash_table) {
 
 hash* generate_hash(table* hash_table, void* data, TYPES type) {
     hash* new_hash = (hash*)malloc(sizeof(hash));
-    if (new_hash==NULL) return FAILURE;
+    if (new_hash==NULL) return NULL;
     new_hash->data = data;
     new_hash->type = type;
 
     // generate hash code
     int table_size = hash_table->size;
+    int tmp_i, tmp;
+    double tmp_d;
     switch (type) {
         case INTEGER:
-            int tmp = *(int*)data;
-            if (tmp<0) tmp *= -1;
-            new_hash->pos = (int)exp(tmp) % table_size;
+            tmp_i = *(int*)data;
+            if (tmp_i<0) tmp_i *= -1;
+            new_hash->pos = (int)exp(tmp_i) % table_size;
             break;
         case DOUBLE:
-            double tmp = *(double*)data;
-            if (tmp<0) tmp *= -1;
-            new_hash->pos = (int)exp(tmp) % table_size;
+            tmp_d = *(double*)data;
+            if (tmp_d<0) tmp_d *= -1;
+            new_hash->pos = (int)exp(tmp_d) % table_size;
             break;
         case STRING:
-            int tmp = 0;
-            int str_len = strlen((char*)data);
-            for (int i=0; i<str_len; i++)
+            tmp = 0;
+            for (int i=0; i<strlen((char*)data); i++)
                 tmp += *((char*)data + i);
             new_hash->pos = (int)exp(tmp) % table_size;
             break;
