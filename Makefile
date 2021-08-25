@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -O2
+CFLAGS = -g -Wall -Wextra	# For Debugging
+#CFLAGS = -O2 				 # For Build
 SRC_DIR = src/
 OBJ_DIR = bin/obj/
 EXEC_DIR = bin/
@@ -29,7 +30,7 @@ run: all
 	@$(EXEC_DIR)./$(EXEC)
 	@echo [EXEC] Done!
 
-debug: all
+mem_check: all
 	@echo [INFO] Debugging ...
 	@valgrind --tool=memcheck --leak-check=yes --track-origins=yes $(EXEC_DIR)./$(EXEC)
 	@echo [DEBUG] Done!
