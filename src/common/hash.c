@@ -48,7 +48,16 @@ hash* generate_hash(table* hash_table, void* data, TYPES type) {
     return new_hash;
 }
 
-// TODO: implement this function
 int attach_hash(table* hash_table, hash* data_hash) {
-    return FAILURE;
+    if (data_hash==NULL) return FAILURE;
+    while (hash_table->size < data_hash->pos)
+        resize_table(hash_table);
+
+    if (hash_table->hashes + data_hash->pos == NULL) {
+        list* hash_list = generate_list();
+        if (append(hash_list, data_hash, HASH)==FAILURE) return FAILURE;
+    } else {
+        if (append(hash_table->hashes + data_hash->pos, data_hash, HASH)==FAILURE) return FAILURE;
+        return SUCCESS;
+    }
 }
