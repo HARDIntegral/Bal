@@ -28,5 +28,6 @@ int append(list* list, void* data, TYPES type);
 return_vals* retrive_data(list* list, int pos, int destroy);
 return_vals* pop(list* list);
 return_vals* trim(list* list);
+int concat(list* a, list* b, int destroy_second);
 
 #endif // LIST_H

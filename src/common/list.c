@@ -87,6 +87,18 @@ return_vals* trim(list* list) {
     return vals;
 }
 
+int concat(list* a, list* b, int destroy_second) {
+    if (a==NULL || b==NULL) return FAILURE;
+
+    node_l* tmp = b->head;
+    while (tmp!=NULL) {
+        if (append(a, tmp->data, tmp->type)==FAILURE) return FAILURE;
+        tmp = tmp->next;
+    }
+    if (destroy_second!=0) destroy_list(b);
+    return SUCCESS;
+}
+
 // HELPERS
 void destroy_node(node_l* node) {
     node->prev->next = node->next;
