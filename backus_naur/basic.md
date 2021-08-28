@@ -1,15 +1,24 @@
 ```
 <assignment>    ::= <typedef> <identifier> ";"
                 |   <typedef> <identifier> "=" <expressions> ";"
-                |   <identifier> "=" <expressions> ";";
+                |   <identifier> "=" <expressions> ";"
+                ;
 
-<identifier>    ::= <letter> <id>
-                |   _ <id>;
-<id>            ::= <letter> | <digit> | _
-                |   <letter> <id>
-                |   <digit> <id>
-                |   _ <id>;
+<expressions>  ::= <expression> | <expressions>;
+<expression>   ::= <literal> <operator> <literal>
+                |   <operator> <literal>
+                |   <literal> <operator>
+                ;
+
+<identifier>    ::= <letter> <id>;
+<id>            ::= <letters> | <digits>;
+
+<letters>       ::= <letter> | <letters>
 <letter>        ::= a | b | c | ... | z
-                |   A | B | C | ... | Z;
+                |   A | B | C | ... | Z
+                |   _
+                ;
+
+<digits>        ::= <digit> | <digits>
 <digit>         ::= 0 | 1 | 2 | ... | 9;
 ```

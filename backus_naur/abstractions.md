@@ -1,16 +1,20 @@
-
-```
-<function>      ::= "func" <identifier> "() {" <expressions> "}"
-                |   "func" <identifier> "() =" <type> "{" <expressions> "}"
-                |   "func" <identifier> "(" <parameters> ") {" <expressions> "}"
-                |   "func" <identifier> "(" <parameters> ") =" <type> "{" <expressions> "}"
+```markdown
+<function>      ::= "func" <identifier> "()" "{" <expressions> "}"
+                |   "func" <identifier> "()" "=" <type> "{" <expressions> "}"
+                |   "func" <identifier> "(" <parameters> ")" "{" <expressions> "}"
+                |   "func" <identifier> "(" <parameters> ")" "=" <type> "{" <expressions> "}"
                 ;
 
 <typedef>       ::= "typedef" <struct>
                 |   "typedef" <enum>
+                |   "int"
+                |   "char"
+                |   "float"
+                |   "double"
+                |   "String"
                 ;
 
-<struct>        ::= "struct" <identifier> "{" <expressions> "};";
+<struct>        ::= "struct" <identifier> "{" <expressions> "}";
 
-<enum>          ::= "enum" <identifier> "{" <expressions> "};";
+<enum>          ::= "enum" <identifier> "{" <expressions> "}";
 ```
