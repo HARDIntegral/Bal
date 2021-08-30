@@ -1,7 +1,7 @@
 #include "file_handler.h"
 
-FILE* open_file(char* file_name);
-char* sub_string(char* string, int pos, int len);
+static FILE* open_file(char* file_name);
+static char* sub_string(char* string, int pos, int len);
 
 int verify_file(char* file_name) {
     int extension_len = 3;
@@ -29,7 +29,7 @@ list* lineify(char* file_contents) {
 }
 
 // HELPERS
-FILE* open_file(char* file_name) {
+static FILE* open_file(char* file_name) {
     FILE* file = fopen(file_name, "r");
     if (file == NULL) {
         perror("UNABLE TO OPEN FILE");
@@ -40,7 +40,7 @@ FILE* open_file(char* file_name) {
 }
 
 
-char* sub_string(char* string, int pos, int len) {
+static char* sub_string(char* string, int pos, int len) {
     char* sub = malloc(len + 1);
     if (sub==NULL) return NULL;
 

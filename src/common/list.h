@@ -21,7 +21,6 @@ list* generate_list();
 void destroy_list(list* list);
 
 void march(list* list, void (*op)(node_l*), int reverse);
-void destroy_node(node_l* node);
 
 int push(list* list, void* restrict data, COMMON_TYPES type);
 int append(list* list, void* restrict data, COMMON_TYPES type);
