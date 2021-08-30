@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra	# For Debugging
-#CFLAGS = -O2 				 # For Build
+CFLAGS = -g -Wall -Wextra -O0	# For Debugging
+#CFLAGS = -O3 				 # For Build
 SRC_DIR = src/
 OBJ_DIR = bin/obj/
 EXEC_DIR = bin/

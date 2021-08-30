@@ -1,9 +1,14 @@
 #include "lexer.h"
 
-char** lexeme_marcher(char* raw_segment) {
-    char** segments = (char**)malloc(strlen(raw_segment) * sizeof(char));
-    char* buffer = (char*)malloc(strlen(raw_segment) * sizeof(char));
+char** lexeme_marcher(char* line) {
+    const int line_len = strlen(line);
+    char** segments = (char**)malloc(line_len * sizeof(char));
+    char* buffer = (char*)malloc(line_len * sizeof(char));
     
+    // march through the charactor in the given line
+    for (int i = 0; i < line_len; i++) {
+        break;
+    }
 }
 
 list* lexeme_generator(list* lines) {

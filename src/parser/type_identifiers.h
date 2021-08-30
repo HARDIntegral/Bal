@@ -11,6 +11,10 @@ enum lexer_types {
     function_declaration_keyword,
     return_keyword,
 
+    volatile_keyword,
+    restrict_keyword,
+    static_keyword,
+
     if_keyword,
     elif_keyword,
     else_keyword,
