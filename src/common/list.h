@@ -6,7 +6,6 @@
 typedef struct node_l node_l;
 struct node_l {
     void* data;
-    COMMON_TYPES type;
     node_l* next;
     node_l* prev;
 };
@@ -15,15 +14,16 @@ struct list {
     node_l* head;
     node_l* tail;
     unsigned int size;
+    COMMON_TYPES type;
 };
 
-list* generate_list();
+list* generate_list(COMMON_TYPES type);
 void destroy_list(list* list);
 
 void march(list* list, void (*op)(node_l*), int reverse);
 
-int push(list* list, void* restrict data, COMMON_TYPES type);
-int append(list* list, void* restrict data, COMMON_TYPES type);
+int push(list* list, void* restrict data);
+int append(list* list, void* restrict data);
 return_vals* retrive_data(list* list, int pos, int destroy);
 return_vals* pop(list* list);
 return_vals* trim(list* list);

@@ -1,14 +1,15 @@
 #include "list.h"
 
 static void destroy_node(node_l* node);
-static node_l* generate_node(void* restrict data, COMMON_TYPES type);
+static node_l* generate_node(void* restrict data);
 
-list* generate_list() {
+list* generate_list(COMMON_TYPES type) {
     list* new_list = (list*)malloc(sizeof(list));
     if (new_list!=NULL) {
         new_list->head = NULL;
         new_list->tail = NULL;
         new_list->size = 0;
+        new_list->type = type;
     }
     return new_list;
 }
@@ -31,8 +32,8 @@ void destroy_list(list* list) {
     list=NULL;
 }
 
-int push(list* list, void* restrict data, COMMON_TYPES type) {
-    node_l* node = generate_node(data, type);
+int push(list* list, void* restrict data) {
+    node_l* node = generate_node(data);
     if (node == NULL) return FAILURE;
     
     if (list->size==0) list->tail = node;
@@ -45,8 +46,8 @@ int push(list* list, void* restrict data, COMMON_TYPES type) {
     return SUCCESS;
 }
 
-int append(list* list, void* restrict data, COMMON_TYPES type) {
-    node_l* node = generate_node(data, type);
+int append(list* list, void* restrict data) {
+    node_l* node = generate_node(data);
     if (node == NULL) return FAILURE;
     
     if (list->size==0)
@@ -68,7 +69,7 @@ return_vals* retrive_data(list* list, int pos, int destroy) {
 
     return_vals* val = (return_vals*)malloc(sizeof(return_vals));
     val->data = node->data;
-    val->type = node->type;
+    val->type = list->type;
 
     if (destroy!=0) destroy_node(node);
 
@@ -92,7 +93,7 @@ int concat(list* a, list* b, int destroy_second) {
 
     node_l* tmp = b->head;
     while (tmp!=NULL) {
-        if (append(a, tmp->data, tmp->type)==FAILURE) return FAILURE;
+        if (append(a, tmp->data)==FAILURE) return FAILURE;
         tmp = tmp->next;
     }
     if (destroy_second!=0) destroy_list(b);
@@ -113,11 +114,10 @@ static void destroy_node(node_l* node) {
     node = NULL;
 }
 
-static node_l* generate_node(void* restrict data, COMMON_TYPES type) {
+static node_l* generate_node(void* restrict data) {
     node_l* new_node = (node_l*)malloc(sizeof(node_l));
     if (new_node!=NULL) {
         new_node->data = data;
-        new_node->type = type;
         new_node->next = NULL;
         new_node->prev = NULL;
     }

@@ -6,13 +6,13 @@
 typedef struct node_b node_b;
 struct node_b {
     void* data;
-    COMMON_TYPES type;
     node_b* left;
     node_b* right;
 };
 typedef struct tree tree;
 struct tree {
     node_b* root;
+    COMMON_TYPES type;
 };
 
 tree* generate_tree();

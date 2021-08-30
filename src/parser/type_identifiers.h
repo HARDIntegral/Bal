@@ -3,7 +3,7 @@
 
 typedef enum lexer_types lexer_types;
 enum lexer_types {
-    import_statment,
+    import_statement,
     from_statement,
     struct_declaration_keyword,
     enum_definition_keyword,
