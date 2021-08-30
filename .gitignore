@@ -54,3 +54,4 @@ dkms.conf
 # gae ass vsc shit
 .history/
 .vscode/
+.vs/

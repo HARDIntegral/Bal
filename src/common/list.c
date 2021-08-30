@@ -1,7 +1,7 @@
 #include "list.h"
 
 void destroy_node(node_l* node);
-node_l* generate_node(void* data, TYPES type);
+node_l* generate_node(void* restrict data, COMMON_TYPES type);
 
 list* generate_list() {
     list* new_list = (list*)malloc(sizeof(list));
@@ -31,7 +31,7 @@ void destroy_list(list* list) {
     list=NULL;
 }
 
-int push(list* list, void* data, TYPES type) {
+int push(list* list, void* restrict data, COMMON_TYPES type) {
     node_l* node = generate_node(data, type);
     if (node == NULL) return FAILURE;
     
@@ -45,7 +45,7 @@ int push(list* list, void* data, TYPES type) {
     return SUCCESS;
 }
 
-int append(list* list, void* data, TYPES type) {
+int append(list* list, void* restrict data, COMMON_TYPES type) {
     node_l* node = generate_node(data, type);
     if (node == NULL) return FAILURE;
     
@@ -113,7 +113,7 @@ void destroy_node(node_l* node) {
     node = NULL;
 }
 
-node_l* generate_node(void* data, TYPES type) {
+node_l* generate_node(void* restrict data, COMMON_TYPES type) {
     node_l* new_node = (node_l*)malloc(sizeof(node_l));
     if (new_node!=NULL) {
         new_node->data = data;

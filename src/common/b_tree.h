@@ -6,7 +6,7 @@
 typedef struct node_b node_b;
 struct node_b {
     void* data;
-    TYPES type;
+    COMMON_TYPES type;
     node_b* left;
     node_b* right;
 };

@@ -14,7 +14,7 @@ int resize_table(table* hash_table) {
     hash_table = (table*)realloc(hash_table, hash_table->size*2*sizeof(table));
 }
 
-hash* generate_hash(table* hash_table, void* data, TYPES type) {
+hash* generate_hash(table* hash_table, void* data, COMMON_TYPES type) {
     hash* new_hash = (hash*)malloc(sizeof(hash));
     if (new_hash==NULL) return NULL;
     new_hash->data = data;
