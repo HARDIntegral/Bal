@@ -54,10 +54,10 @@ int attach_hash(table* hash_table, hash* data_hash) {
         resize_table(hash_table);
 
     if (hash_table->hashes + data_hash->pos == NULL) {
-        list* hash_list = generate_list();
-        if (append(hash_list, data_hash, HASH)==FAILURE) return FAILURE;
+        list* hash_list = generate_list(HASH);
+        if (append(hash_list, data_hash)==FAILURE) return FAILURE;
     } else {
-        if (append(hash_table->hashes + data_hash->pos, data_hash, HASH)==FAILURE) return FAILURE;
+        if (append(hash_table->hashes + data_hash->pos, data_hash)==FAILURE) return FAILURE;
         return SUCCESS;
     }
 }

@@ -17,12 +17,12 @@ list* lineify(char* file_contents) {
     FILE* file = fopen(file_contents, "r");
     if (file == NULL) return NULL;
 
-    list* line_list = generate_list();
+    list* line_list = generate_list(STRING);
 
     char* line = NULL;
     size_t len = 0;
     while (getline(&line, &len, file) != -1)
-        if (append(line_list, (void*)line, STRING)==FAILURE) return NULL;
+        if (append(line_list, (void*)line)==FAILURE) return NULL;
     fclose(file);
 
     return line_list;

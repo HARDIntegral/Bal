@@ -75,6 +75,8 @@ enum lexer_types {
     float_literal,
     double_literal,
     string_literal,
+
+    NO_TYPE,
 };
 
 #endif // TYPE_IDNETIFIERS_H
