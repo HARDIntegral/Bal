@@ -1,7 +1,7 @@
 #include "lexer.h"
 
 static char** lexeme_marcher(const char* line);
-static lexer_types* buffer_checker(const char* buffer, const char seek);
+static lexer_types buffer_checker(const char* buffer, const char seek);
 
 list* lexeme_generator(list* lines) {
     return NULL;
@@ -19,13 +19,13 @@ static char** lexeme_marcher(const char* line) {
     for (int i = 0; i < line_len; i++) {
         *(buffer + i) = *(seek_char);
         *(seek_char) = *(line + i + 1);
-        if (*(seek_char)=="\0") break;
+        if (*(seek_char)=='\0') break;
     }
 }
 
-static lexer_types* buffer_checker(const char* buffer, const char seek) {
-    if (*(buffer)=="\"") {
-        if (seek=="\"") return string_literal;
+static lexer_types buffer_checker(const char* buffer, const char seek) {
+    if (*(buffer)=='\"') {
+        if (seek=='\"') return string_literal;
         else return NO_TYPE;
     } else if () {}
 }
