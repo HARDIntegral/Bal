@@ -1,7 +1,5 @@
 ```
-<function>          ::= "func" <identifier> "()" "{" <expressions> "}"
-                    |   "func" <identifier> "()" "=" <type> "{" <expressions> "}"
-                    |   "func" <identifier> "(" <parameters> ")" "{" <expressions> "}"
+<function>          ::= "func" <identifier> "()" "=" <type> "{" <expressions> "}"
                     |   "func" <identifier> "(" <parameters> ")" "=" <type> "{" <expressions> "}"
                     ;
 

@@ -4,7 +4,7 @@ CFLAGS = -g -Wall -Wextra -O0	# For Debugging
 SRC_DIR = src/
 OBJ_DIR = bin/obj/
 EXEC_DIR = bin/
-NAME = bolt
+NAME = bal
 TARGET = out
 LIBS = -lm
 
@@ -16,9 +16,11 @@ SRCS := $(wildcard src/**/**.c) $(wildcard src/*.c)
 OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 all: $(OBJS)
-	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
-	@$(CC) -o $(BUILD) $^ $(LIBS)
-	@echo [INFO] [$(EXEC)] Created!
+#	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
+#	@$(CC) -o $(BUILD) $^ $(LIBS)
+#	@echo [INFO] [$(EXEC)] Created!
+	@echo [INFO] Creating Jank Library 
+	@$(CC) -o $(EXEC_DIR)$(NAME).o $^ $(LIBS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo [CC] $<

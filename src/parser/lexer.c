@@ -27,5 +27,5 @@ static lexer_types buffer_checker(const char* buffer, const char seek) {
     if (*(buffer)=='\"') {
         if (seek=='\"') return string_literal;
         else return NO_TYPE;
-    } else if () {}
+    } //else if () {}
 }
