@@ -20,13 +20,19 @@ int comp(int argc, char** argv) {
     return SUCCESS;
 }
 
+void printString(void *input) {
+    char *string = (char *)input;
+    printf("%s ", string);
+}
+
 static int compile(char* file_name) {
     // verify file can open
     FILE* file = open_file(file_name);
     if (file == NULL) return FAILURE;
 
     list* lines = lineify(file);
-    printf("done\n");
+    march(lines, printString, 0);
+    printf("\ndone\n");
     return SUCCESS;
 }
 
