@@ -19,8 +19,11 @@ list* lineify(FILE* file) {
 
     char* line = NULL;
     size_t len = 0;
-    while (getline(&line, &len, file) != -1)
-        if (append(line_list, (void*)line)==FAILURE) return NULL;
+    while (getline(&line, &len, file) != -1) {
+        char* holder = (char*)malloc(strlen(line)*sizeof(char));
+        strcpy(holder, line);
+        if (append(line_list, (void*)holder)==FAILURE) return NULL;
+    }
     fclose(file);
 
     return line_list;

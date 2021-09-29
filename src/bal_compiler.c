@@ -30,7 +30,7 @@ static int compile(char* file_name) {
 
     list* lines = lineify(file);
     march(lines, printString, 0);
-    printf("\ndone\n");
+    destroy_list(lines); 
     return SUCCESS;
 }
 
