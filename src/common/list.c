@@ -1,5 +1,7 @@
 #include "list.h"
 
+#define kill(X) free(X)
+
 static void destroy_node(node_l* node);
 static node_l* generate_node(void* restrict data);
 

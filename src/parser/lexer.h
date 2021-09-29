@@ -8,7 +8,7 @@
 typedef struct lexeme lexeme;
 struct lexeme {
     char* segment;
-    lexer_types type
+    lexer_types type;
 };
 
 list* lexeme_generator(list* lines);

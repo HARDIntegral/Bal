@@ -1,4 +1,14 @@
 #pragma once
 
-int comp(const char* path);
-uint8_t argument_handler(int num_args, char** args);
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+typedef struct inputs inputs;
+struct inputs {
+    uint8_t options;
+    char** files;
+    int num_files;
+};
+
+int comp(int argc, char** argv);
