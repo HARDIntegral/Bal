@@ -1,6 +1,4 @@
-#ifndef BAL_COMPILER_H
-#define BAL_COMPILER_H
+#pragma once
 
 int comp(const char* path);
-
-#endif // BAL_COMPILER_H
+uint8_t argument_handler(int num_args, char** args);

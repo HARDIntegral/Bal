@@ -1,0 +1,17 @@
+import { Print, List } from StdLib;
+
+func factorial(n: int32) -> List<int32> {
+    List<int32> factorials = List<int32>.generate();
+    factorials.append({0, 1});
+    
+    while (factorials.size() < n)
+        factorials.append((factorials.size() - 1) + (factorials.size() - 2));
+
+    return factorials;
+}
+
+func main() -> void {
+    // Lets print the first 20 fibonacci numbers
+    // I know i named the function factorial to bug you lol
+    Print("?{}\n", factorial(20));
+}

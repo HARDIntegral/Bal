@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -O0	# For Debugging
+CXXC = g++
+CFLAGS = -g -Wall -Wextra	# For Debugging
 #CFLAGS = -O3 				 # For Build
 SRC_DIR = src/
 OBJ_DIR = bin/obj/
@@ -16,11 +17,9 @@ SRCS := $(wildcard src/**/**.c) $(wildcard src/*.c)
 OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 all: $(OBJS)
-#	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
-#	@$(CC) -o $(BUILD) $^ $(LIBS)
-#	@echo [INFO] [$(EXEC)] Created!
-	@echo [INFO] Creating Jank Library 
-	@$(CC) -o $(EXEC_DIR)$(NAME).o $^ $(LIBS)
+	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
+	@$(CC) -o $(BUILD) $^ $(LIBS)
+	@echo [INFO] [$(EXEC)] Created!
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo [CC] $<
