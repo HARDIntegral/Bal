@@ -13,7 +13,7 @@ typedef struct list list;
 struct list {
     node_l* head;
     node_l* tail;
-    unsigned int size;
+    int size;
     COMMON_TYPES type;
 };
 

@@ -14,15 +14,13 @@ static int compile(char* file_name);
 
 int comp(int argc, char** argv) {
     inputs* test = argument_handler(argc, argv);
-    for (int i = 0; i < test->num_files; i++) {
-        if (compile(*(test->files + i)));
-    }
+    for (int i = 0; i < test->num_files; i++)
+        if (compile(*(test->files + i)) == FAILURE) break;
     return SUCCESS;
 }
 
-void printString(void *input) {
-    char *string = (char *)input;
-    printf("%s ", string);
+void printString(node_l* input) {
+    printf("%s ", (char *)(input->data));
 }
 
 static int compile(char* file_name) {

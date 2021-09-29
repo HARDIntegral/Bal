@@ -16,7 +16,7 @@ list* generate_list(COMMON_TYPES type) {
     return new_list;
 }
 
-void march(list* list, void (*op)(node_l*), int reverse) {
+void march(list* list, void (op)(node_l*), int reverse) {
     if (list == NULL) return;
     node_l* current = (reverse ? list->tail : list->head);
 

@@ -12,6 +12,8 @@ int verify_file(char* file_name) {
     return SUCCESS; 
 }
 
+
+// TODO: Fix the bug where the string is overwritten everytime loop is iterated
 list* lineify(FILE* file) {
     list* line_list = generate_list(STRING);
 
