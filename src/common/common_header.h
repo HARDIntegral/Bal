@@ -11,6 +11,7 @@ enum COMMON_TYPES {
     FLOAT,
     CHAR,
     STRING,
+    STRING_ARR,
     HASH,
 };
 

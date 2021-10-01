@@ -104,10 +104,12 @@ int concat(list* a, list* b, int destroy_second) {
 
 // HELPERS
 static void destroy_node(node_l* node) {
-    node->prev->next = node->next;
-    node->next->prev = node->prev;
+    if (node==NULL) return;
 
-    free(node->data);
+    if (node->prev != NULL) node->prev->next = node->next;
+    if (node->next != NULL) node->next->prev = node->prev;
+
+    if (node->data != NULL) free(node->data);
     node->data = NULL;
     node->next = NULL;
     node->prev = NULL;

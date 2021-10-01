@@ -11,11 +11,15 @@
 
 static inputs* argument_handler(int num_args, char** args);
 static int compile(char* file_name);
+static void destroy_input(inputs* input);
 
 int comp(int argc, char** argv) {
     inputs* test = argument_handler(argc, argv);
-    for (int i = 0; i < test->num_files; i++)
+    for (int i = 0; i < test->num_files; i++) {
         if (compile(*(test->files + i)) == FAILURE) break;
+    }
+
+    destroy_input(test);
     return SUCCESS;
 }
 
@@ -30,8 +34,17 @@ static int compile(char* file_name) {
 
     list* lines = lineify(file);
     march(lines, printString, 0);
+    list* lexemes = lexeme_generator(lines);
+
     destroy_list(lines); 
     return SUCCESS;
+}
+
+static void destroy_input(inputs* input) {
+    free(input->files);
+    input->files = NULL;
+    free(input);
+    input = NULL;
 }
 
 // very ugly function
