@@ -9,7 +9,7 @@ NAME = bal
 TARGET = out
 LIBS = -lm
 
-ARGS = test/test_files/factorial.bl
+ARGS = test/test_files/basic.bl
 
 #### DO NOT EDIT BELOW THIS LINE ####
 

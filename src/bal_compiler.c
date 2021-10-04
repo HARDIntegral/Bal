@@ -14,7 +14,7 @@ static int compile(char* file_name);
 static void destroy_input(inputs* input);
 
 int comp(int argc, char** argv) {
-    inputs* test = argument_handler(argc, argv);
+    inputs* test = argument_handler(argc, argv);    
     for (int i = 0; i < test->num_files; i++) {
         if (compile(*(test->files + i)) == FAILURE) break;
     }
@@ -33,7 +33,7 @@ static int compile(char* file_name) {
     if (file == NULL) return FAILURE;
 
     list* lines = lineify(file);
-    march(lines, printString, 0);
+    //march(lines, printString, 0);
     list* lexemes = lexeme_generator(lines);
 
     destroy_list(lines); 

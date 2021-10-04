@@ -73,21 +73,19 @@ return_vals* retrive_data(list* list, int pos, int destroy) {
     val->data = node->data;
     val->type = list->type;
 
-    if (destroy!=0) destroy_node(node);
+    if (destroy) destroy_node(node);
 
     return val;
 }
 
 return_vals* pop(list* list) {
-    if (list==NULL || list->head==NULL) return NULL;
-    return_vals* vals = retrive_data(list, 0, 1);
-    return vals;
+    list->size--;
+    return retrive_data(list, 0, 0);
 }
 
 return_vals* trim(list* list) {
-    if (list==NULL || list->tail==NULL) return NULL;
-    return_vals* vals = retrive_data(list, list->size-1, 1);
-    return vals;
+    list->size--;
+    return retrive_data(list, list->size-1, 0);
 }
 
 int concat(list* a, list* b, int destroy_second) {
