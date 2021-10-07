@@ -26,11 +26,13 @@ void march(list* list, void (op)(node_l*), int reverse) {
 }
 
 void destroy_list(list* list) {
-    march(list, &destroy_node, 0);
-    list->head = NULL;
-    list->tail = NULL;
+    while (list->head) {
+        free(list->head->data);
+        node_l *tmp = list->head->next;
+        free(list->head);
+        list->head = tmp;
+    }
     free(list);
-    list=NULL;
 }
 
 int push(list* list, void* restrict data) {

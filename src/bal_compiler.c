@@ -34,6 +34,7 @@ static int compile(char* file_name) {
 
     list* lines = lineify(file);
     list* lexemes = lexeme_generator(lines);
+    destroy_list(lexemes);
     return SUCCESS;
 }
 

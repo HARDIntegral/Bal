@@ -9,7 +9,7 @@ NAME = bal
 TARGET = out
 LIBS = -lm
 
-ARGS = test/test_files/basic.bl
+ARGS = test/test_files/factorial.bl
 
 #### DO NOT EDIT BELOW THIS LINE ####
 
@@ -35,7 +35,7 @@ run: all
 
 mem_check: all
 	@echo [INFO] Debugging ...
-	@valgrind --tool=memcheck --leak-check=full --track-origins=yes $(EXEC_DIR)./$(EXEC) $(ARGS)
+	@valgrind --tool=memcheck -s --leak-check=full --track-origins=yes $(EXEC_DIR)./$(EXEC) $(ARGS)
 	@echo [DEBUG] Done!
 
 .PHONY: clean

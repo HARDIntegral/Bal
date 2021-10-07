@@ -34,8 +34,8 @@ static char** lexeme_marcher(const char* line) {
         if (buffer_iter >= buffer_size) buffer = (char*)realloc(buffer, buffer_size*=2);
         buffer[buffer_iter++] = seek;
         seek = line[i];
-        printf("%s\n", buffer);
     }
+    printf("%s\n", buffer);
 
     buffer = realloc(buffer, 0);
     return segments;

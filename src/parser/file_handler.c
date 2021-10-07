@@ -9,6 +9,7 @@ int verify_file(char* file_name) {
     
     const char* verification = ".bl";
     if (strcmp(extension, verification)!=0) return FAILURE;
+    free(extension);
     return SUCCESS; 
 }
 
@@ -25,6 +26,7 @@ list* lineify(FILE* file) {
         if (append(line_list, (void*)holder)==FAILURE) return NULL;
     }
     fclose(file);
+    free(line);
 
     return line_list;
 }
