@@ -19,14 +19,15 @@ struct list {
 
 list* generate_list(COMMON_TYPES type);
 void destroy_list(list* list);
+void destroy_node(node_l* node);
 
 void march(list* list, void (*op)(node_l*), int reverse);
 
 int push(list* list, void* restrict data);
 int append(list* list, void* restrict data);
 return_vals* retrive_data(list* list, int pos, int destroy);
-return_vals* pop(list* list);
-return_vals* trim(list* list);
+node_l* pop(list* list);
+node_l* trim(list* list);
 int concat(list* a, list* b, int destroy_second);
 
 #endif // LIST_H

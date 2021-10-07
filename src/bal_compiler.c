@@ -33,10 +33,7 @@ static int compile(char* file_name) {
     if (file == NULL) return FAILURE;
 
     list* lines = lineify(file);
-    //march(lines, printString, 0);
     list* lexemes = lexeme_generator(lines);
-
-    destroy_list(lines); 
     return SUCCESS;
 }
 

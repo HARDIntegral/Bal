@@ -2,7 +2,6 @@
 
 #define kill(X) free(X)
 
-static void destroy_node(node_l* node);
 static node_l* generate_node(void* restrict data);
 
 list* generate_list(COMMON_TYPES type) {
@@ -78,14 +77,24 @@ return_vals* retrive_data(list* list, int pos, int destroy) {
     return val;
 }
 
-return_vals* pop(list* list) {
+node_l* pop(list* list) {
+    if (list==NULL) return NULL;
+    node_l* tmp = list->head;
+
     list->size--;
-    return retrive_data(list, 0, 0);
+    if (list->head->next != NULL) list->head->next->prev = NULL;
+    list->head = list->head->next;
+    return tmp;
 }
 
-return_vals* trim(list* list) {
+node_l* trim(list* list) {
+    if (list==NULL) return NULL;
+    node_l* tmp = list->head;
+
     list->size--;
-    return retrive_data(list, list->size-1, 0);
+    list->tail->prev->next = NULL;
+    list->tail = list->tail->prev;
+    return tmp;
 }
 
 int concat(list* a, list* b, int destroy_second) {
@@ -100,8 +109,7 @@ int concat(list* a, list* b, int destroy_second) {
     return SUCCESS;
 }
 
-// HELPERS
-static void destroy_node(node_l* node) {
+void destroy_node(node_l* node) {
     if (node==NULL) return;
 
     if (node->prev != NULL) node->prev->next = node->next;
@@ -116,6 +124,7 @@ static void destroy_node(node_l* node) {
     node = NULL;
 }
 
+// HELPERS
 static node_l* generate_node(void* restrict data) {
     node_l* new_node = (node_l*)malloc(sizeof(node_l));
     if (new_node!=NULL) {
