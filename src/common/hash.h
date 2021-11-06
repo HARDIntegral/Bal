@@ -7,7 +7,7 @@
 #include "common_header.h"
 
 typedef struct ht {
-    hash* hashes;
+    hash** hashes;
     uint8_t size;
 }ht;
 typedef struct hash {
@@ -18,6 +18,6 @@ typedef struct hash {
 
 ht* generate_table(uint8_t init_size);
 hash* generate_hash(ht* hash_table, void* data, COMMON_TYPES type);
-int attach_hash(ht* hash_table, hash* data_hash);
+void attach_hash(ht* hash_table, hash* data_hash);
 
 #endif // HASH_H
