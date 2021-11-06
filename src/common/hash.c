@@ -1,63 +1,24 @@
 #include "hash.h"
 
-table* generate_table(int init_size) {
-    table* new_table = (table*)malloc(init_size * sizeof(table));
-    if (new_table!=NULL) {
-        new_table->hashes = NULL;
-        new_table->size = init_size;
-    }
-    return new_table;
+ht* generate_table(uint8_t init_size) {
+    return (hash*)malloc(init_size*sizeof(hash));
 }
 
-int resize_table(table* hash_table) {
-    if (hash_table==NULL) return FAILURE;
-    hash_table = (table*)realloc(hash_table, hash_table->size*2*sizeof(table));
-}
-
-hash* generate_hash(table* hash_table, void* data, COMMON_TYPES type) {
+hash* generate_hash(ht* hash_table, void* data, COMMON_TYPES type) {
     hash* new_hash = (hash*)malloc(sizeof(hash));
-    if (new_hash==NULL) return NULL;
-    new_hash->data = data;
-    new_hash->type = type;
+    if (new_hash)
+        new_hash->data = data;
+        new_hash->type = type;
 
     // generate hash code
-    int table_size = hash_table->size;
-    int tmp_i, tmp;
-    double tmp_d;
-    switch (type) {
-        case INTEGER:
-            tmp_i = *(int*)data;
-            if (tmp_i<0) tmp_i *= -1;
-            new_hash->pos = (int)exp(tmp_i) % table_size;
-            break;
-        case DOUBLE:
-            tmp_d = *(double*)data;
-            if (tmp_d<0) tmp_d *= -1;
-            new_hash->pos = (int)exp(tmp_d) % table_size;
-            break;
-        case STRING:
-            tmp = 0;
-            for (int i=0; i<strlen((char*)data); i++)
-                tmp += *((char*)data + i);
-            new_hash->pos = (int)exp(tmp) % table_size;
-            break;
-        default:
-            return NULL;
-    }
+    // read bytes and do some fancy math I guess
 
     return new_hash;
 }
 
-int attach_hash(table* hash_table, hash* data_hash) {
-    if (data_hash==NULL) return FAILURE;
-    while (hash_table->size < data_hash->pos)
-        resize_table(hash_table);
+int attach_hash(ht* hash_table, hash* data_hash) {
+    // gotta figure out how to deal with same hash values 
+    // maybe a dangling list or something like that...
 
-    if (hash_table->hashes + data_hash->pos == NULL) {
-        list* hash_list = generate_list(HASH);
-        if (append(hash_list, data_hash)==FAILURE) return FAILURE;
-    } else {
-        if (append(hash_table->hashes + data_hash->pos, data_hash)==FAILURE) return FAILURE;
-        return SUCCESS;
-    }
+
 }

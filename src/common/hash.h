@@ -1,25 +1,23 @@
 #ifndef HASH_H
 #define HASH_H
 
+#include <stdint.h>
 #include <math.h>
 #include <string.h>
-#include "list.h"
+#include "common_header.h"
 
-typedef struct table table; 
-struct table {
-    list* hashes; 
-    unsigned int size;
-};
-typedef struct hash hash;
-struct hash {
+typedef struct ht {
+    hash* hashes;
+    uint8_t size;
+}ht;
+typedef struct hash {
+    uint16_t hash;
     void* data;
     COMMON_TYPES type;
-    unsigned int pos;
-};
+}hash;
 
-table* generate_table(int init_size);
-int resize_table(table* hash_table);
-hash* generate_hash(table* hash_table, void* data, COMMON_TYPES type);
-int attach_hash(table* hash_table, hash* data_hash);
+ht* generate_table(uint8_t init_size);
+hash* generate_hash(ht* hash_table, void* data, COMMON_TYPES type);
+int attach_hash(ht* hash_table, hash* data_hash);
 
 #endif // HASH_H
